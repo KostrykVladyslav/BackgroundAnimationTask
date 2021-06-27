@@ -18,14 +18,16 @@ class CustomAnimationView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private val baseSpeedDpPeerSecond = 300
-    private val count = 32
-    private val speed = 1337
+    companion object {
+        private const val baseSpeedDpPeerSecond = 300
+        private const val count = 32
+        private const val speed = 1337
 
-    private val scaleMinPart = 0.45f
-    private val scaleRandomPart = 0.55f
-    private val alphaScalePart = 1f
-    private val alphaRandomPart = 0f
+        private const val scaleMinPart = 0.45f
+        private const val scaleRandomPart = 0.55f
+        private const val alphaScalePart = 1f
+        private const val alphaRandomPart = 0f
+    }
 
     private val starsArray = Array(count) { Star() }
     private val random = Random(speed.toLong())
@@ -33,18 +35,17 @@ class CustomAnimationView @JvmOverloads constructor(
     private val currentPlayTime: Float = 0f
 
     private lateinit var drawable: Drawable
-    private var  baseSpeed: Float
-    private var  baseSize: Float
+    private var baseSpeed: Float
+    private var baseSize: Float
 
 
     init {
-        context.getDrawable(R.drawable.star)?.let {
-            drawable = it
-        }
+        context.getDrawable(R.drawable.star)?.let { drawable = it }
 
         baseSpeed = baseSpeedDpPeerSecond * resources.displayMetrics.density
         baseSize = max(drawable.intrinsicWidth, drawable.intrinsicHeight) / 2f
     }
+
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
